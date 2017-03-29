@@ -1,4 +1,5 @@
 var runningTotal = 0.0;
+document.cookie = "preTax=";
 
 function addItem()
 {
@@ -12,7 +13,7 @@ function addItem()
     var dollars = asCurrency(runningTotal);
     document.getElementById('subtotal').innerHTML = dollars;
     document.getElementById("price").value = '';
-    document.cookie = "preTax = runningTotal";
+    setCookie("preTax", runningTotal, 30);
   //OTHERWISE,
   // update newItem to its value cast as a number
   // update runningTotal to be its value plus newItem
@@ -50,4 +51,12 @@ function getCookie(cname) {
         }
     }
     return "";
+}
+
+function calculateReceipt(){
+ var receiptSubtotal = getCookie("preTax");
+ console.log(receiptSubtotal.value);
+ var receiptTax = receiptSubtotal * .075;
+ var receiptTotal = receiptSubtotal + receiptTax;
+ document.getElementById('sub').innerHTML = receiptTotal.value;
 }
