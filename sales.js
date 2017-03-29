@@ -4,9 +4,15 @@ function addItem()
 {
   var newItem;
   newItem = document.getElementById("price").value;
-  if(isNaN("newItem")){
-    alert.("Enter price as a number");
+  if(isNaN(document.getElementById('price').value)){
+    alert("Enter price as a number");
   }
+    newItem = Number(newItem);
+    runningTotal = newItem + runningTotal;
+    var dollars = asCurrency(runningTotal);
+    document.getElementById('subtotal').innerHTML = dollars;
+    document.getElementById("price").value = '';
+    document.cookie = "preTax = runningTotal";
   //OTHERWISE,
   // update newItem to its value cast as a number
   // update runningTotal to be its value plus newItem
