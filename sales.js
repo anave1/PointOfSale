@@ -13,7 +13,7 @@ function addItem()
     var dollars = asCurrency(runningTotal);
     document.getElementById('subtotal').innerHTML = dollars;
     document.getElementById("price").value = '';
-    setCookie("preTax", runningTotal, 30);
+    setCookie("preTax", dollars, 30);
   //OTHERWISE,
   // update newItem to its value cast as a number
   // update runningTotal to be its value plus newItem
@@ -54,7 +54,8 @@ function getCookie(cname) {
 }
 
 function calculateReceipt(){
- var receiptSubtotal = Number(runningTotal);
+  console.log(runningTotal.value);
+ var receiptSubtotal = runningTotal.value;
  console.log(receiptSubtotal.value);
  receiptSubtotal = Number(receiptSubtotal);
  var money = asCurrency(receiptSubtotal);
