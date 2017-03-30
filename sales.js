@@ -54,13 +54,15 @@ function getCookie(cname) {
 }
 
 function calculateReceipt(){
-  console.log(runningTotal.value);
- var receiptSubtotal = runningTotal.value;
- console.log(receiptSubtotal.value);
- receiptSubtotal = Number(receiptSubtotal);
- var money = asCurrency(receiptSubtotal);
- console.log(receiptSubtotal.value);
- var receiptTax = receiptSubtotal * .075;
- var receiptTotal = receiptSubtotal + receiptTax;
- document.getElementById('sub').innerHTML = receiptTotal.value;
+  var receiptSubtotal;
+  receiptSubtotal = getCookie("preTax");
+  var subtot;
+  subtot = Number(receiptSubtotal);
+  var receiptTax;
+  receiptTax = receiptSubtotal * .075;
+  var receiptTotal;
+  receiptTotal = receiptSubtotal + receiptTax;
+  document.getElementById('sub').innerHTML = receiptSubtotal;
+  document.getElementById('tax').innerHTML = receiptTax;
+  document.getElementById('tot').innerHTML = receiptTotal;
 }
