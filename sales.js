@@ -1,19 +1,22 @@
 var runningTotal = 0.0;
-document.cookie = "preTax=";
 
 function addItem()
 {
   var newItem;
   newItem = document.getElementById("price").value;
-  if(isNaN(document.getElementById('price').value)){
+  if(isNaN(newItem)){
     alert("Enter price as a number");
-  }
+  } else {
     newItem = Number(newItem);
     runningTotal = newItem + runningTotal;
-    var dollars = asCurrency(runningTotal);
+    var dollars;
+    dollars = asCurrency(runningTotal);
     document.getElementById('subtotal').innerHTML = dollars;
     document.getElementById("price").value = '';
-    setCookie("preTax", dollars, 30);
+    console.log(dollars);
+    console.log(document.cookie);
+    setCookie("preTax", runningTotal, 30);
+  }
   //OTHERWISE,
   // update newItem to its value cast as a number
   // update runningTotal to be its value plus newItem
@@ -56,12 +59,16 @@ function getCookie(cname) {
 function calculateReceipt(){
   var receiptSubtotal;
   receiptSubtotal = getCookie("preTax");
-  var subtot;
-  subtot = Number(receiptSubtotal);
+  receiptSubtotal = Number(receiptSubtotal);
+  console.log(receiptSubtotal);
   var receiptTax;
-  receiptTax = receiptSubtotal * .075;
+  receiptTax = receiptSubtotal * 0.075;
+
   var receiptTotal;
   receiptTotal = receiptSubtotal + receiptTax;
+  receiptTax = asCurrency(receiptTax);
+  receiptTotal = asCurrency(receiptTotal);
+  receiptSubtotal = asCurrency(receiptSubtotal);
   document.getElementById('sub').innerHTML = receiptSubtotal;
   document.getElementById('tax').innerHTML = receiptTax;
   document.getElementById('tot').innerHTML = receiptTotal;
